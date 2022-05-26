@@ -2,15 +2,23 @@ import express from 'express';
 import fs from 'fs';
 import https from 'https';
 import cors from 'cors';
+import router from './routes.js'
+import {createTable} from "./Controller/Produto.js"
 
 const app = express();
 app.use(express.json());
 app.use(cors());
 
-import router from './routes.js'
+
 app.use(router);
 
-app.listen( 3000, ()=>console.log("Api Rodando."))
+    
+
+createTable()
+  .then(() => {
+    app.listen(3000, () => console.log("Api Rodando."));
+  })
+  .catch((err) => console.error(err));
 
 https.createServer({
     cert: fs.readFileSync('src/SSL/code.crt'),

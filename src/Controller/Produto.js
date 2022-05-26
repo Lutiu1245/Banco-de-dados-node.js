@@ -2,7 +2,7 @@ import { openDb } from '../configDB.js';
 
 export async function createTable(){
     openDb().then(db=>{
-        db.exec('CREATE TABLE IF NOT EXISTS Produto ( id INTEGER PRIMARY KEY, nome TEXT, Valor INTEGER )')
+        db.exec('CREATE TABLE IF NOT EXISTS Produto ( id INTEGER PRIMARY KEY, name TEXT, Valor FLOAT I )')
     })
 }
 
@@ -21,10 +21,13 @@ export async function selectProduto(req, res){
     });
 }
 
-export async function inserProduto(req, res){
+export async function insertProduto(req, res){
     let Produto = req.body;
     openDb().then(db=>{
-        db.run('INSERT INTO Produto (nome, Valor) VALUES (?,?)', [Produto.nome, Produto.Valor]);
+        db.run('INSERT INTO Produto (name, Valor) VALUES (?,?)', [
+        Produto.name,
+        Produto.Valor,
+        ]);
     });
     res.json({
         "statusCode": 200
@@ -34,7 +37,11 @@ export async function inserProduto(req, res){
 export async function updateProduto(req, res){
     let Produto = req.body;
     openDb().then(db=>{
-        db.run('UPDATE Produto SET nome=?, Valor=? WHERE id=?', [Produto.nome, Produto.Valor, Produto.id]);
+        db.run('UPDATE Produto SET name=?, Valor=? WHERE id=?', [
+        Produto.name,
+        Produto.Valor,
+        Produto.id
+        ]);
     });
     res.json({
         "statusCode": 200
