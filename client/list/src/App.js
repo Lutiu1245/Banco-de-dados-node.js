@@ -1,16 +1,13 @@
-import "./App.css";
+import React, { useEffect, useState } from "react";
+import api from "./servicos/api.js";
 
-function App (){
+export default function App() {
+  const [user, setUser] = useState();
 
   return (
-    <div className="app-container">
-      <div className="register-container">
-        <h1>Lista de Produtos</h1>
-        <input type={text} name="name" placeholder="Nome" className="register-input"></input>
-        <input type={text} name="name" placeholder="Preço" className="register-input"></input>
-        <input type={text} name="name" placeholder="Tipo" className="register-input"></input>
-      </div>
+    <div className="App">
+      <p>Usuário: {user?.login}</p>
+      <p>Biografia: {user?.bio}</p>
     </div>
-  )
-
+  );
 }
